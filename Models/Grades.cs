@@ -25,12 +25,12 @@ public partial class Grades
     {
         using MyLab3Context context = new();
 
-        // Include foreign keys and choose to show dates between today and 30 days back. Sort by grade date.
+        // Include foreign keys and choose to show all rows with gradedates last month. Sort by grade date.
         var grades = context.Grades
             .Include(b => b.Fkemployee)
             .Include(b => b.Fkstudent)
             .Where(b => b.GradeDate <= DateTime.Today)
-            .Where(b => b.GradeDate >= DateTime.Today.AddDays(-30))
+            .Where(b => b.GradeDate >= DateTime.Today.AddMonths(-1))
             .OrderBy(b => b.GradeDate);
 
         Console.Clear();
